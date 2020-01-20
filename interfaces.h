@@ -2,47 +2,24 @@
 // Created by matan on 1/14/20.
 //
 
-#ifndef HW4__INTERFACES_H_
-#define HW4__INTERFACES_H_
+#ifndef HW4_SEARCHALGORITHMS_INTERFACES_H_
+#define HW4_SEARCHALGORITHMS_INTERFACES_H_
 
-#include <string>
-#include <sstream>
-#include <cstring>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
-#include <string>
-#include <iostream>
-#include <unistd.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
+#include "Solution.h"
+#include "State.h"
 
-using namespace std;
-
-template<typename Problem, typename  Solution> class Solver {
+template <typename T> class ISearchable {
  public:
-  virtual Solution solve(Problem problem) = 0;
+  virtual State<T>* getInitialState() = 0;
+  virtual bool isGoal(State<T>* s) = 0;
+  virtual vector<State<T>*> getAllPossibleStates(State<T>* curr) = 0;
+  virtual double getCost(State<T>* curr, State<T>* next) = 0;
 };
 
-class CacheManager {
+template <typename T> class ISearcher {
  public:
-  virtual bool doesSolutionExists(string problem) = 0;
-  virtual string returnSolution(string problem) = 0;
-  virtual void saveSolution(string problem, string solution) = 0;
+  virtual Solution<T> search(ISearchable<T>* problem) = 0;
+  virtual ISearcher<T>* clone() = 0;
+  virtual int numberOfNodeExpended() = 0;
 };
-
-class ClientHandler {
- public:
-  virtual void handleClient(int inputStream, int outputStream) = 0;
-};
-
-class Server {
- protected:
-  bool needToClose;
- public:
-  virtual void open(int port, ClientHandler* clientHandler) = 0;
-  virtual void close() = 0;
-};
-
-#endif //HW4__INTERFACES_H_
+#endif //HW4_SEARCHALGORITHMS_INTERFACES_H_
