@@ -13,6 +13,6 @@ Compile using g++ with any version of cpp below c++14.
 
 Run this program and run a client with port 5600 to use it.
 
-##Git
+## Git
 
 [GIT_HUB](https://github.com/matanEpel/Ex4)
