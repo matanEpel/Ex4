@@ -5,6 +5,9 @@
 #include <fstream>
 #include "FileCacheManager.h"
 void FileCacheManager::saveSolution(string problem, string solution) {
+  hash<string> hasher;
+  size_t hash = hasher(problem);
+  problem = to_string(hash);
   try{
     ofstream fileStream;
     fileStream.exceptions(ifstream::failbit); //making exceptions to occur;
@@ -25,6 +28,9 @@ void FileCacheManager::saveSolution(string problem, string solution) {
 }
 
 string FileCacheManager::returnSolution(string problem) {
+  hash<string> hasher;
+  size_t hash = hasher(problem);
+  problem = to_string(hash);
   string solution;
   try{
     ifstream fileStream;
@@ -48,6 +54,9 @@ string FileCacheManager::returnSolution(string problem) {
 }
 
 bool FileCacheManager::doesSolutionExists(string problem) {
+  hash<string> hasher;
+  size_t hash = hasher(problem);
+  problem = to_string(hash);
   //checking if file exists:
   FILE* file1;
   file1 = fopen(problem.c_str(), "r");
@@ -60,4 +69,7 @@ bool FileCacheManager::doesSolutionExists(string problem) {
   {
     return false;
   }
+}
+FileCacheManager *FileCacheManager::clone() {
+  return new FileCacheManager();
 }

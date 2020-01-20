@@ -12,6 +12,7 @@ class FileCacheManager : public CacheManager{
   bool doesSolutionExists(string problem) override;
   string returnSolution(string problem) override;
   void saveSolution(string problem, string solution) override;
+  FileCacheManager* clone() override;
 };
 
 #endif //HW4__FILECACHEMANAGER_H_
