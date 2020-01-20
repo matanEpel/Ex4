@@ -10,7 +10,7 @@
 class MySerialServer : public Server{
  public:
   void open(int port, ClientHandler* clientHandler) override;
-  void close() override;
+  void closeS() override;
 };
 
 #endif //HW4__MYSERIALSERVER_H_

@@ -2,24 +2,50 @@
 // Created by matan on 1/14/20.
 //
 
-#ifndef HW4_SEARCHALGORITHMS_INTERFACES_H_
-#define HW4_SEARCHALGORITHMS_INTERFACES_H_
+#ifndef HW4__INTERFACES_H_
+#define HW4__INTERFACES_H_
 
-#include "Solution.h"
-#include "State.h"
+#include <string>
+#include <sstream>
+#include <cstring>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <string>
+#include <iostream>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
-template <typename T> class ISearchable {
+using namespace std;
+
+template<typename Problem, typename  Solution> class Solver {
  public:
-  virtual State<T>* getInitialState() = 0;
-  virtual bool isGoal(State<T>* s) = 0;
-  virtual vector<State<T>*> getAllPossibleStates(State<T>* curr) = 0;
-  virtual double getCost(State<T>* curr, State<T>* next) = 0;
+  virtual Solution solve(Problem problem) = 0;
+  virtual Solver<Problem, Solution>* clone() = 0;
 };
 
-template <typename T> class ISearcher {
+class CacheManager {
  public:
-  virtual Solution<T> search(ISearchable<T>* problem) = 0;
-  virtual ISearcher<T>* clone() = 0;
-  virtual int numberOfNodeExpended() = 0;
+  virtual bool doesSolutionExists(string problem) = 0;
+  virtual string returnSolution(string problem) = 0;
+  virtual void saveSolution(string problem, string solution) = 0;
+  virtual CacheManager* clone() = 0;
 };
-#endif //HW4_SEARCHALGORITHMS_INTERFACES_H_
+
+class ClientHandler {
+ public:
+  virtual void handleClient(int inputStream, int outputStream) = 0;
+  virtual ClientHandler* clone() = 0;
+};
+
+class Server {
+ protected:
+  bool needToClose;
+ public:
+  virtual void open(int port, ClientHandler* clientHandler) = 0;
+  virtual void closeS() = 0;
+};
+
+#endif //HW4__INTERFACES_H_
