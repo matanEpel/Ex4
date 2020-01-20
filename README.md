@@ -1,10 +1,9 @@
 # EX4
 
-ex3 is a cpp program which is used to control the flight-gear simulator using a basic code commands.
-The ex3 "compiler" can handle the folowing commands:
-OpenDataServer, ConnectControlClient, If, While, Sleep, Print
-and can handle variables that can be connected to certain 
-variables inside the simulator itself.
+ex4 is a cpp program which is used to calculate shortest pathes in a matrixes
+using a_star, best first search, BFS or DFS.
+Because a_star is the best out of them - for the final calculation we are
+using a star.
 
 ##Compiling
 
@@ -12,9 +11,8 @@ Compile using g++ with any version of cpp below c++14.
 
 ## Running
 
-Run the program while providing a text file which contains your code 
-as a command line argument.
+Run this program and run a client with port 5600 to use it.
 
 ##Git
 
-[GIT_HUB](https://github.com/matanEpel/Ex3)
+[GIT_HUB](https://github.com/matanEpel/Ex4)
